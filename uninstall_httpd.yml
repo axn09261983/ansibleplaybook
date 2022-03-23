@@ -1,0 +1,31 @@
+---
+- name: uninstall and configure apache
+  hosts: web
+  become: yes
+
+  vars:
+    become_ansible_pass: "vagrant"
+
+  tasks:
+
+    - name: stop httpd
+      ansible.builtin.service:
+        name: httpd
+        state: stopped
+
+    - name: Remove index.html
+      file:
+        path: /var/www/html/index.html
+        state: absent
+
+    - name: uninstall httpd
+      ansible.builtin.yum:
+        name: httpd
+        state: absent
+
+
+... 
+
+       
+
+
